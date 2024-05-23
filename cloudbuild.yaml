@@ -13,7 +13,7 @@ steps:
     args:
       - '-Dsonar.host.url=https://sonarcloud.io'
       - '-Dsonar.login=$_SONAR_TOKEN'
-      - '-Dsonar.projectKey=career-crew_career-board'
+      - '-Dsonar.projectKey=career-crew_career-board-service'
       - '-Dsonar.organization=career-crew'
       - '-Dsonar.sources=src/main/java/'
       - '-Dsonar.tests=src/test/java'

@@ -1,10 +1,10 @@
-package com.chaiadventures;
+package net.careerboard;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ChiApplicationTests {
+class CareerBoardApplicationTests {
 
 	@Test
 	void contextLoads() {

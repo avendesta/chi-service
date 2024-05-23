@@ -6,7 +6,8 @@ steps:
       - '-Dsonar.projectKey=career-crew_career-board'
       - '-Dsonar.organization=career-crew'
       - '-Dsonar.sources=src/main/java/'
-      - '-Dsonar.java.binaries=**/target/classes'
+      - '-Dsonar.tests=src/test/java'
+      - '-Dsonar.java.binaries=target/classes'
   - name: gcr.io/cloud-builders/docker
     args:
       - build

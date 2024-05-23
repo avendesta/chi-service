@@ -28,7 +28,6 @@ HELP.md
 target/*
 # But not these files...
 !target/*.jar
-!target/classes
 
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/

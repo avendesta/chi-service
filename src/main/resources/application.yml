@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: career-board
+  datasource:
+    url: jdbc:postgresql:///career-board
+    username: career-board
+    password: career-board-password
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      data-source-properties:
+        socketFactory: com.google.cloud.sql.postgres.SocketFactory
+        cloudSqlInstance: career-crew:us-central1:career-board-instance
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: always

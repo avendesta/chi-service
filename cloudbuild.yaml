@@ -5,18 +5,18 @@ steps:
       - '-t'
       - '$_AR_HOSTNAME/$PROJECT_ID/$_AR_REPO/$_SERVICE_NAME:$COMMIT_SHA'
       - .
-  - name: gcr.io/cloud-builders/docker
-    args:
-      - push
-      - '$_AR_HOSTNAME/$PROJECT_ID/$_AR_REPO/$_SERVICE_NAME:$COMMIT_SHA'
-  - name: 'gcr.io/$PROJECT_ID/sonar-scanner:latest'
-    args:
-      - '-Dsonar.host.url=https://sonarcloud.io'
-      - '-Dsonar.login=$_SONAR_TOKEN'
-      - '-Dsonar.projectKey=career-crew_career-board-service'
-      - '-Dsonar.organization=career-crew'
-      - '-Dsonar.sources=src/main/java/'
-      - '-Dsonar.tests=src/test/java'
+#  - name: gcr.io/cloud-builders/docker
+#    args:
+#      - push
+#      - '$_AR_HOSTNAME/$PROJECT_ID/$_AR_REPO/$_SERVICE_NAME:$COMMIT_SHA'
+#  - name: 'gcr.io/$PROJECT_ID/sonar-scanner:latest'
+#    args:
+#      - '-Dsonar.host.url=https://sonarcloud.io'
+#      - '-Dsonar.login=$_SONAR_TOKEN'
+#      - '-Dsonar.projectKey=career-crew_career-board-service'
+#      - '-Dsonar.organization=career-crew'
+#      - '-Dsonar.sources=src/main/java/'
+#      - '-Dsonar.tests=src/test/java'
 
   - name: gcr.io/google.com/cloudsdktool/cloud-sdk
     args:

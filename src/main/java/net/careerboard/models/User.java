@@ -17,10 +17,10 @@ public class User {
     @Column(unique = true, nullable = false, length = 30, name = "username")
     @Size(min = 4, max = 30)
     String username;
-    @Column(name = "firstName", nullable = false)
+    @Column(name = "first_name", nullable = false)
     @Size(max = 30)
     String firstName;
-    @Column(name = "lastName", nullable = false)
+    @Column(name = "last_name", nullable = false)
     @Size(max = 30)
     String lastName;
     @Column(nullable = false, updatable = false, name = "created_at")

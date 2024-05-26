@@ -1,27 +1,49 @@
 package net.careerboard.models;
 
-import com.google.api.client.util.DateTime;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "user_account")
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
 public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     Long id;
+    @Column(unique = true, nullable = false, length = 30, name = "username")
+    @Size(min = 4, max = 30)
     String username;
+    @Column(name = "firstName", nullable = false)
+    @Size(max = 30)
     String firstName;
+    @Column(name = "lastName", nullable = false)
+    @Size(max = 30)
     String lastName;
+    @Column(nullable = false, updatable = false, name = "created_at")
     LocalDateTime createdAt;
+    @Column(nullable = false, name = "active")
     Boolean active;
+    public User(){
+        this.active = true; // default value
+        this.createdAt = LocalDateTime.now(); // default value
+    }
+    public User(String username, String firstName, String lastName) {
+        super();
+        this.username = username;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "username='" + username + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                '}';
+    }
 }

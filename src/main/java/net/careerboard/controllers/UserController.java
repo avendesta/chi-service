@@ -22,8 +22,8 @@ public class UserController {
     @PostMapping(value = "/user")
     public ResponseEntity<String> createUser(@RequestBody User user){
         try{
-            this.userService.addUser(user);
-            return new ResponseEntity<>("User is created successfully", HttpStatus.OK);
+            User createdUser = this.userService.addUser(user);
+            return new ResponseEntity<>("User is created successfully: " + createdUser.toString(), HttpStatus.CREATED);
         } catch (Exception e){
             return new ResponseEntity<>("User is creation failed", HttpStatus.INTERNAL_SERVER_ERROR);
         }

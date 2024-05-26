@@ -3,11 +3,10 @@ package net.careerboard.controllers;
 import lombok.RequiredArgsConstructor;
 import net.careerboard.models.User;
 import net.careerboard.services.UserService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 
@@ -21,10 +20,14 @@ public class UserController {
     }
 
     @PostMapping(value = "/user")
-    public User user(){
-        User sampleUser = new User(1L,"adesta","aven", "desta", LocalDateTime.now(), true );
-        this.userService.addUser(sampleUser);
-        return sampleUser;
+    public ResponseEntity<String> createUser(@RequestBody User user){
+        try{
+            this.userService.addUser(user);
+            return new ResponseEntity<>("User is created successfully", HttpStatus.OK);
+        } catch (Exception e){
+            return new ResponseEntity<>("User is creation failed", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
     }
 
 }

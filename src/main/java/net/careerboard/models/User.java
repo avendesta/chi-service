@@ -1,10 +1,14 @@
 package net.careerboard.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
+import org.checkerframework.checker.units.qual.C;
+
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "user_account")
@@ -13,7 +17,7 @@ import java.time.LocalDateTime;
 public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    Long id;
+    Long userId;
     @Column(unique = true, nullable = false, length = 30, name = "username")
     @Size(min = 4, max = 30)
     String username;
@@ -27,6 +31,9 @@ public class User {
     LocalDateTime createdAt;
     @Column(nullable = false, name = "active")
     Boolean active;
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties("user")
+    private List<Post> posts;
     public User(){
         this.active = true; // default value
         this.createdAt = LocalDateTime.now(); // default value

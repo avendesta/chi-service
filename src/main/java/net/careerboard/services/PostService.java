@@ -6,6 +6,7 @@ import net.careerboard.repos.PostRepo;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -22,5 +23,9 @@ public class PostService {
 
     public List<Post> findPostsByUserId(Long userId){
         return this.postRepo.findByUserUserId(userId);
+    }
+
+    public Optional<Post> findById(Long postId) {
+        return this.postRepo.findById(postId);
     }
 }

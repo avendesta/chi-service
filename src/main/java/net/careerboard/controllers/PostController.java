@@ -38,6 +38,19 @@ public class PostController {
         }
     }
 
+    // Method to fetch a post by its ID
+    @GetMapping("/{postId}")
+    public ResponseEntity<?> getPostById(@PathVariable Long postId) {
+        Optional<Post> postOptional = postService.findById(postId);
+        if (postOptional.isPresent()) {
+            return ResponseEntity.ok(postOptional.get());
+        } else {
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body("Post with ID " + postId + " not found");
+        }
+    }
+
     @PostMapping
     public ResponseEntity<?> createPost(@RequestBody PostRequest request) {
         Optional<User> userOptional = userService.findById(request.getUserId());

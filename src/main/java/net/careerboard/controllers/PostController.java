@@ -23,8 +23,6 @@ public class PostController {
     private final UserService userService;
     @PostMapping
     public ResponseEntity<PostDTO> createPost(@RequestBody CreatePostRequest request) {
-        System.out.println("HERE");
-        System.out.println(request);
         Optional<User> userOptional = userService.findById(request.getUserId());
         if (userOptional.isPresent()) {
             User user = userOptional.get();

@@ -3,12 +3,10 @@ package net.careerboard.controllers;
 import lombok.RequiredArgsConstructor;
 import net.careerboard.models.Post;
 import net.careerboard.models.User;
-import net.careerboard.models.dto.CreatePostRequest;
-import net.careerboard.models.dto.PostDTO;
+import net.careerboard.models.dto.PostRequest;
 import net.careerboard.services.PostService;
 import net.careerboard.services.UserService;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,7 +20,7 @@ public class PostController {
     private final PostService postService;
     private final UserService userService;
     @PostMapping
-    public ResponseEntity<?> createPost(@RequestBody CreatePostRequest request) {
+    public ResponseEntity<?> createPost(@RequestBody PostRequest request) {
         Optional<User> userOptional = userService.findById(request.getUserId());
         if (userOptional.isPresent()) {
             User user = userOptional.get();

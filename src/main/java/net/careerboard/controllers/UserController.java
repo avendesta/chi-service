@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/api")
 public class UserController {
     private final UserService userService;
     @RequestMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)

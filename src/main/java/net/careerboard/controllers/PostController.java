@@ -22,7 +22,7 @@ public class PostController {
     private final PostService postService;
     private final UserService userService;
     @PostMapping
-    public ResponseEntity<PostDTO> createPost(@RequestBody CreatePostRequest request) {
+    public ResponseEntity<?> createPost(@RequestBody CreatePostRequest request) {
         Optional<User> userOptional = userService.findById(request.getUserId());
         if (userOptional.isPresent()) {
             User user = userOptional.get();
@@ -35,7 +35,9 @@ public class PostController {
             Post savedPost = postService.addPost(post);
             return ResponseEntity.ok(savedPost.getPostDTO());
         } else {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body("User with ID " + request.getUserId() + " not found");
         }
     }
 

@@ -1,5 +1,6 @@
 package net.careerboard.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -20,7 +21,7 @@ public class Post {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userId", nullable = false)
-    @JsonIgnoreProperties("post")
+    @JsonBackReference
     private User user;
 
     @Column(nullable = false)

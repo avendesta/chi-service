@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -19,6 +20,24 @@ import java.util.Optional;
 public class PostController {
     private final PostService postService;
     private final UserService userService;
+
+    @GetMapping
+    public ResponseEntity<List<Post>> getAllPosts() {
+        List<Post> posts = postService.findAllPosts();
+        return ResponseEntity.ok(posts);
+    }
+
+    // Method to fetch all posts by userId
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<Post>> getPostsByUserId(@PathVariable Long userId) {
+        List<Post> posts = postService.findPostsByUserId(userId);
+        if (posts.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.ok(posts);
+        }
+    }
+
     @PostMapping
     public ResponseEntity<?> createPost(@RequestBody PostRequest request) {
         Optional<User> userOptional = userService.findById(request.getUserId());

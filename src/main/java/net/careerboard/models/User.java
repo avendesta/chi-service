@@ -1,6 +1,7 @@
 package net.careerboard.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
@@ -32,7 +33,7 @@ public class User {
     @Column(nullable = false, name = "active")
     Boolean active;
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnoreProperties("user")
+    @JsonManagedReference
     private List<Post> posts;
     public User(){
         this.active = true; // default value

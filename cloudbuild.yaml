@@ -43,8 +43,10 @@ steps:
           --region $_DEPLOY_REGION \
           --platform $_PLATFORM
 
-timeout: 1200s
+timeout: 600s
 images:
   - '$_AR_HOSTNAME/$PROJECT_ID/$_AR_REPO/$_SERVICE_NAME:$COMMIT_SHA'
 options:
   logging: CLOUD_LOGGING_ONLY
+  machineType: N1_HIGHCPU_8
+  diskSizeGb: 20

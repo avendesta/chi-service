@@ -1,28 +1,39 @@
 steps:
-  - name: gcr.io/cloud-builders/docker
+  - id: 'Build Docker Image'
+    # Description: Build the Docker image from the source code
+    name: gcr.io/cloud-builders/docker
     entrypoint: 'bash'
     args:
       - '-c'
       - |
         docker build -t $_AR_HOSTNAME/$PROJECT_ID/$_AR_REPO/$_SERVICE_NAME:$COMMIT_SHA .
-
-  - name: gcr.io/cloud-builders/docker
+  - id: 'Push Docker Image'
+    # Description: Push the Docker image to the Artifact Registry
+    name: gcr.io/cloud-builders/docker
     entrypoint: 'bash'
     args:
       - '-c'
       - |
         docker push $_AR_HOSTNAME/$PROJECT_ID/$_AR_REPO/$_SERVICE_NAME:$COMMIT_SHA
 
-  #  - name: 'gcr.io/$PROJECT_ID/sonar-scanner:latest'
+#  - id: 'Run Sonar Scanner'
+#    # Description: Analyze the code for quality and security issues using SonarScanner
+#    name: gcr.io/$PROJECT_ID/sonar-scanner:latest
+#    entrypoint: 'bash'
 #    args:
-#      - '-Dsonar.host.url=https://sonarcloud.io'
-#      - '-Dsonar.login=$_SONAR_TOKEN'
-#      - '-Dsonar.projectKey=career-crew_career-board-service'
-#      - '-Dsonar.organization=career-crew'
-#      - '-Dsonar.sources=src/main/java/'
-#      - '-Dsonar.tests=src/test/java'
+#      - '-c'
+#      - |
+#        sonar-scanner \
+#          -Dsonar.host.url=https://sonarcloud.io \
+#          -Dsonar.login=$_SONAR_TOKEN \
+#          -Dsonar.projectKey=career-crew_career-board-service \
+#          -Dsonar.organization=career-crew \
+#          -Dsonar.sources=src/main/java/ \
+#          -Dsonar.tests=src/test/java
 
-  - name: gcr.io/google.com/cloudsdktool/cloud-sdk
+  - id: 'Deploy to Cloud Run'
+    # Description: Deploy the Docker image to Google Cloud Run
+    name: gcr.io/google.com/cloudsdktool/cloud-sdk
     entrypoint: 'bash'
     args:
       - '-c'

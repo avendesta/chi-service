@@ -38,10 +38,14 @@ steps:
     args:
       - '-c'
       - |
-        gcloud run deploy $_SERVICE_NAME \
-          --image $_AR_HOSTNAME/$PROJECT_ID/$_AR_REPO/$_SERVICE_NAME:$COMMIT_SHA \
-          --region $_DEPLOY_REGION \
-          --platform $_PLATFORM
+        if [ "$_DEPLOY" -eq 1 ]; then
+          gcloud run deploy $_SERVICE_NAME \
+            --image $_AR_HOSTNAME/$PROJECT_ID/$_AR_REPO/$_SERVICE_NAME:$COMMIT_SHA \
+            --region $_DEPLOY_REGION \
+            --platform $_PLATFORM;
+        else
+          echo "Skipping deployment as _DEPLOY is not set to 1";
+        fi
 
 timeout: 600s
 images:

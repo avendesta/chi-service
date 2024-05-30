@@ -21,6 +21,15 @@ spring:
     serialization:
       fail-on-empty-beans: false
 
+  cloud:
+    gcp:
+      secretmanager:
+        enabled: true
+        project-id: career-crew
+        secret-name-prefix: 'sm://'
+      sql:
+        enabled: false
+
 management:
   endpoints:
     web:

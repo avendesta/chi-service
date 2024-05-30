@@ -1,7 +1,6 @@
 package net.careerboard.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -41,6 +40,7 @@ public class Post {
                 '}';
     }
 
+    @JsonBackReference
     public PostDTO getPostDTO(){
         return new PostDTO(getUser().getUserId(), getTitle(), getContent());
     }

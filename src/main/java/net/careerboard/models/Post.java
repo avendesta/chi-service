@@ -40,7 +40,6 @@ public class Post {
                 '}';
     }
 
-    @JsonBackReference
     public PostDTO getPostDTO(){
         return new PostDTO(getUser().getUserId(), getTitle(), getContent());
     }

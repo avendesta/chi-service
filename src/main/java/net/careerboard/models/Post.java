@@ -44,4 +44,8 @@ public class Post {
     public PostDTO getPostDTO(){
         return new PostDTO(getUser().getUserId(), getTitle(), getContent());
     }
+
+    public String getUsername(){
+        return user.getUsername();
+    }
 }

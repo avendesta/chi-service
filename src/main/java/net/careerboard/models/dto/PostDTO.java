@@ -3,7 +3,6 @@ package net.careerboard.models.dto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import net.careerboard.models.Post;
 
 @Getter
 @Setter

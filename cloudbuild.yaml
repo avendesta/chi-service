@@ -16,20 +16,20 @@ steps:
       - |
         docker push $_AR_HOSTNAME/$PROJECT_ID/$_AR_REPO/$_SERVICE_NAME:$COMMIT_SHA
 
-#  - id: 'Run Sonar Scanner'
-#    # Description: Analyze the code for quality and security issues using SonarScanner
-#    name: gcr.io/$PROJECT_ID/sonar-scanner:latest
-#    entrypoint: 'bash'
-#    args:
-#      - '-c'
-#      - |
-#        sonar-scanner \
-#          -Dsonar.host.url=https://sonarcloud.io \
-#          -Dsonar.login=$_SONAR_TOKEN \
-#          -Dsonar.projectKey=career-crew_career-board-service \
-#          -Dsonar.organization=career-crew \
-#          -Dsonar.sources=src/main/java/ \
-#          -Dsonar.tests=src/test/java
+  - id: 'Run Sonar Scanner'
+    # Description: Analyze the code for quality and security issues using SonarScanner
+    name: gcr.io/$PROJECT_ID/sonar-scanner:latest
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        sonar-scanner \
+          -Dsonar.host.url=https://sonarcloud.io \
+          -Dsonar.login=$_SONAR_TOKEN \
+          -Dsonar.projectKey=career-crew_career-board-service \
+          -Dsonar.organization=career-crew \
+          -Dsonar.sources=src/main/java/ \
+          -Dsonar.tests=src/test/java
 
   - id: 'Deploy to Cloud Run'
     # Description: Deploy the Docker image to Google Cloud Run

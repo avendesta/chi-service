@@ -49,13 +49,6 @@
 			<scope>runtime</scope>
 		</dependency>
 
-		<!-- Google Cloud Secret Manager Client Library -->
-		<dependency>
-			<groupId>com.google.cloud</groupId>
-			<artifactId>google-cloud-secretmanager</artifactId>
-			<version>2.44.0</version>
-		</dependency>
-
 		<!-- Spring Cloud GCP Starter for Secret Manager -->
 		<dependency>
 			<groupId>com.google.cloud</groupId>

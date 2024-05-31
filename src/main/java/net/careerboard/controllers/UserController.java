@@ -3,6 +3,7 @@ package net.careerboard.controllers;
 import lombok.RequiredArgsConstructor;
 import net.careerboard.models.User;
 import net.careerboard.services.UserService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -12,9 +13,12 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @RequestMapping("/api")
 public class UserController {
+    @Value("${greeting}")
+    String greeting;
     private final UserService userService;
     @RequestMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody String home() {
+        System.out.println("Hello "+greeting);
         return "{'message': 'Hello world'}";
     }
 

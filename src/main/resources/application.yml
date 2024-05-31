@@ -1,10 +1,12 @@
 spring:
+  config:
+    import: "sm://"
   application:
     name: career-board
   datasource:
     url: jdbc:postgresql:///career-board
     username: career-board
-    password: career-board-password
+    password: "${sm://projects/553556926651/secrets/pg-dev-password/versions/1}"
     driver-class-name: org.postgresql.Driver
     hikari:
       data-source-properties:
@@ -38,3 +40,6 @@ management:
   endpoint:
     health:
       show-details: always
+
+
+greeting: "${sm://projects/553556926651/secrets/greeting/versions/1}"

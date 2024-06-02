@@ -26,8 +26,6 @@ HELP.md
 
 
 target/*
-# But not these files...
-!target/*.jar
 
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/

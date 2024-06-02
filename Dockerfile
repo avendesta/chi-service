@@ -15,6 +15,6 @@ VOLUME /tmp
 # Copy the built JAR file from the build stage to the run stage
 COPY --from=build /app/target/*.jar app.jar
 # Copy the classes directory to ensure build files are available
-COPY --from=build /app/target/classes/* /workspace/classes/
+COPY --from=build /app/target/* /target/
 # Set the entry point for the application
 ENTRYPOINT ["java","-jar","/app.jar"]

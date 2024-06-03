@@ -6,11 +6,13 @@ Iteration: https://github.com/orgs/career-crew/projects/1
 
 Story: https://github.com/orgs/career-crew/projects/1/views/1?pane=issue&itemId=64595569 (example)
 
+### PR category:
 - [ ] Bug Fixes
 - [ ] Partial Implementation
 - [ ] Complete Implementation
 - [ ] Refactor
 - [ ] Experiment
+- [ ] Pipeline trigger
 
 ### Reviewer Checklist
 - [ ] PR title/description contains id or link of the Story

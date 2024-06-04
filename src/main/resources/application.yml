@@ -3,6 +3,10 @@ spring:
     import: "sm://"
   application:
     name: career-board
+  data:
+    rest:
+      detection-strategy: annotated
+      base-path: /api
   datasource:
     url: jdbc:postgresql:///career-board
     username: career-board

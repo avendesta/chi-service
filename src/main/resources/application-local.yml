@@ -1,0 +1,61 @@
+spring:
+  config:
+    import: "sm://"
+  application:
+    name: career-board
+  datasource:
+    url: jdbc:postgresql:///career-board
+    username: career-board
+    password: "${sm://projects/553556926651/secrets/pg-dev-password/versions/1}"
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      data-source-properties:
+        socketFactory: com.google.cloud.sql.postgres.SocketFactory
+        cloudSqlInstance: career-crew:us-central1:career-board-instance
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
+
+  cloud:
+    gcp:
+      secretmanager:
+        enabled: true
+        project-id: career-crew
+        secret-name-prefix: 'sm://'
+      sql:
+        enabled: false
+
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            client-id: "${sm://projects/553556926651/secrets/github-oauth2-client-id-local/versions/1}"
+            client-secret: "${sm://projects/553556926651/secrets/github-oauth2-client-secret-local/versions/1}"
+            scope: user:email
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+            user-name-attribute: login
+        github:
+          authorization-uri: https://github.com/login/oauth/authorize
+          token-uri: https://github.com/login/oauth/access_token
+          user-info-uri: https://api.github.com/user
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: always
+
+
+greeting: "${sm://projects/553556926651/secrets/greeting/versions/1}"

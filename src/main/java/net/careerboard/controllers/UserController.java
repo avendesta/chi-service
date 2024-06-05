@@ -16,7 +16,7 @@ public class UserController {
     @Value("${greeting}")
     String greeting;
     private final UserService userService;
-    @RequestMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody String home() {
         System.out.println("Hello "+greeting);
         return "{'message': 'Hello world'}";

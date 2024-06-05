@@ -13,6 +13,9 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.security.test.context.support.WithMockUser;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
+
 
 @WebMvcTest(UserController.class)
 public class UserControllerTest {
@@ -20,21 +23,26 @@ public class UserControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
+
+
     @MockBean
     private UserService userService;
 
     @Autowired
     private ObjectMapper objectMapper;
 
+
     @Test
+    @WithMockUser
     public void testHome() throws Exception {
-        mockMvc.perform(get("/api/"))
+        mockMvc.perform(get("/api").with(csrf()))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(content().json("{'message': 'Hello world'}"));
     }
 
     @Test
+    @WithMockUser
     public void testCreateUserSuccess() throws Exception {
         User user = new User();
         user.setFirstName("John");
@@ -49,7 +57,7 @@ public class UserControllerTest {
 
         when(userService.addUser(any(User.class))).thenReturn(createdUser);
 
-        mockMvc.perform(post("/api/user")
+        mockMvc.perform(post("/api/user").with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(user)))
                 .andExpect(status().isCreated())
@@ -57,6 +65,7 @@ public class UserControllerTest {
     }
 
     @Test
+    @WithMockUser
     public void testCreateUserFailure() throws Exception {
         User user = new User();
         user.setFirstName("John");
@@ -65,7 +74,7 @@ public class UserControllerTest {
 
         when(userService.addUser(any(User.class))).thenThrow(new RuntimeException("User creation failed"));
 
-        mockMvc.perform(post("/api/user")
+        mockMvc.perform(post("/api/user").with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(user)))
                 .andExpect(status().isInternalServerError())

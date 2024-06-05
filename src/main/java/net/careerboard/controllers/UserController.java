@@ -13,14 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @RequestMapping("/api")
 public class UserController {
-    @Value("${greeting}")
-    String greeting;
     private final UserService userService;
-    @RequestMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody String home() {
-        System.out.println("Hello "+greeting);
-        return "{'message': 'Hello world'}";
-    }
 
     @GetMapping("/user/{userId}")
     public ResponseEntity<?> getUserById(@PathVariable Long userId) {

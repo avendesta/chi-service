@@ -34,15 +34,6 @@ public class UserControllerTest {
 
     @Test
     @WithMockUser
-    public void testHome() throws Exception {
-        mockMvc.perform(get("/api").with(csrf()))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-                .andExpect(content().json("{'message': 'Hello world'}"));
-    }
-
-    @Test
-    @WithMockUser
     public void testCreateUserSuccess() throws Exception {
         User user = new User();
         user.setFirstName("John");

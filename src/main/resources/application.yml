@@ -40,7 +40,12 @@ spring:
             client-id: "${sm://projects/553556926651/secrets/github-oauth2-client-id/versions/1}"
             client-secret: "${sm://projects/553556926651/secrets/github-oauth2-client-secret/versions/1}"
             scope: user:email
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
             user-name-attribute: login
+        github:
+          authorization-uri: https://github.com/login/oauth/authorize
+          token-uri: https://github.com/login/oauth/access_token
+          user-info-uri: https://api.github.com/user
 
 
 management:

@@ -32,6 +32,17 @@ spring:
       sql:
         enabled: false
 
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            client-id: "${sm://projects/553556926651/secrets/github-oauth2-client-id/versions/1}"
+            client-secret: "${sm://projects/553556926651/secrets/github-oauth2-client-secret/versions/1}"
+            scope: user:email
+            user-name-attribute: login
+
+
 management:
   endpoints:
     web:
